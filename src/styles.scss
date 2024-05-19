@@ -1,1 +1,94 @@
-/* You can add global styles to this file, and also import other style files */
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$capitech-primary: mat.define-palette(mat.$deep-orange-palette, A400);
+$capitech-accent: mat.define-palette(mat.$blue-grey-palette, 500);
+$capitech-warn: mat.define-palette(mat.$red-palette, A700);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$capitech-theme: mat.define-light-theme((color: (primary: $capitech-primary,
+                accent: $capitech-accent,
+                warn: $capitech-warn,
+            )));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($capitech-theme);
+
+// Full HD+
+@media screen and (min-width: 1700px) {}
+
+// Midle
+@media screen and (max-width: 1700px) {
+
+    html,
+    body {
+        font-size: 15px;
+    }
+}
+
+// HD
+@media screen and (max-width: 1200px) {
+
+    html,
+    body {
+        font-size: 14px;
+    }
+}
+
+// Tablet
+@media screen and (max-width: 900px) {}
+
+// Mobile
+@media screen and (max-width: 600px) {}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    font-size: 16px;
+    font-family: Roboto, sans-serif, system-ui, -apple-system;
+}
+
+app-root {
+    width: 100%;
+    height: 100%;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+::-webkit-scrollbar {
+    background-color: transparent;
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #7a7a7ad7 !important;
+    border-radius: 10px !important;
+}
