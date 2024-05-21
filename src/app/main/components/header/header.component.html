@@ -1,0 +1,35 @@
+<div class="header">
+  <h1 id="title">CAPITECH</h1>
+
+  <div id="actions">
+    <app-header-action-btn
+      [icon]="'person'"
+      [topLabel]="'MINHA CONTA'"
+      [bottomLabel]="'OLÁ, GABRIEL!'"
+    ></app-header-action-btn>
+
+    <app-header-action-btn
+      [icon]="'dark_mode'"
+      [topLabel]="'TEMA'"
+      [bottomLabel]="'ESCURO'"
+    ></app-header-action-btn>
+
+    <button mat-button id="cart-btn">
+      <div class="btn-content">
+        <div id="icon">
+          <span class="material-symbols-outlined"> shopping_cart </span>
+        </div>
+
+        <div id="labels">
+          <div id="top">
+            <span>CARRINHO</span>
+          </div>
+
+          <div id="bottom">
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </button>
+  </div>
+</div>

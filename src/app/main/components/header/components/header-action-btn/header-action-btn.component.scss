@@ -1,0 +1,34 @@
+@import '../../../../../shared/styles/colors.scss';
+
+#btn-content {
+    height: 100%;
+    color: $dark-font;
+    display: flex;
+    gap: 0.5rem;
+
+    #icon {
+        height: 100%;
+        display: flex;
+        place-items: center;
+    }
+
+    #labels {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        #top,
+        #bottom {
+            text-align: start;
+        }
+
+        #top {
+            font-size: 0.7rem;
+        }
+
+        #bottom {
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+    }
+}
