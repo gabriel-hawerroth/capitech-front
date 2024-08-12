@@ -1,0 +1,101 @@
+@import '../../../shared/styles/colors.scss';
+
+.page {
+    height: 80svh;
+
+    .mdc-button {
+        position: absolute;
+        right: 3rem;
+        top: 7rem;
+        box-sizing: initial;
+        padding: .8rem 1.4rem;
+        background-color: $primary-red;
+        color: #fff;
+        z-index: 3;
+
+        .btn-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: .7rem;
+        }
+    }
+
+    .content {
+        display: flex;
+        align-items: center;
+        height: 100%;
+
+        .filters {
+            width: 22%;
+            height: 100%;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: .4rem;
+
+            .filter {
+                padding: .5rem;
+                display: flex;
+                flex-direction: column;
+                gap: .8rem;
+
+                .filter-title {
+                    color: #fff;
+                    font-weight: bold;
+                    font-size: 1.3rem;
+                }
+            }
+
+            .price {
+                .range {
+                    display: flex;
+                    flex-direction: column;
+
+                    .values {
+                        color: #ffffff51;
+                        display: flex;
+                        justify-content: space-between;
+                        position: relative;
+                        top: .2rem;
+                    }
+                }
+            }
+        }
+
+        .mat-divider {
+            border-color: #ffffff3f !important;
+        }
+
+        .list {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+
+            .products-list {
+                flex: 1;
+                max-height: 90%;
+                overflow-y: scroll;
+            }
+
+            .paginator {
+                height: 12%;
+                max-width: 40%;
+                background-color: transparent;
+                margin-top: auto;
+                margin-left: auto;
+                padding-right: 4rem;
+
+                .mat-mdc-paginator {
+                    background-color: transparent !important;
+                    color: $dark-font !important;
+                }
+            }
+        }
+    }
+}
+
+.mat-mdc-select {
+    color: $dark-font !important;
+}

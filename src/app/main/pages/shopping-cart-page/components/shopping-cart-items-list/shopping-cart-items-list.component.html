@@ -1,0 +1,65 @@
+<div id="shopping-cart-items-box" class="dark-card">
+  <div class="header">
+    <span class="product">Produto</span>
+
+    <span class="quantity">Qtd</span>
+
+    <span class="price">Preço</span>
+
+    <span class="delete"></span>
+  </div>
+
+  <div class="items">
+    @for (item of cartItems(); track item.id) {
+    <div class="item">
+      <div class="product">
+        @if (item.productImage) {
+        <img
+          [src]="'https://d31xiy6qnxm57r.cloudfront.net/' + item.productImage"
+          alt="Product image"
+          width="110"
+          height="110"
+          priority
+        />
+        } @else {
+        <img
+          ngSrc="assets/images/no-image-product.svg"
+          alt="Product image"
+          width="110"
+          height="110"
+          priority
+        />
+        }
+
+        <span>{{ item.productName }}</span>
+      </div>
+
+      <div class="quantity">
+        <button mat-icon-button>
+          <span class="material-symbols-outlined">remove</span>
+        </button>
+
+        <span>{{ item.quantity }}</span>
+
+        <button mat-icon-button>
+          <span class="material-symbols-outlined">add</span>
+        </button>
+      </div>
+
+      <div class="price">
+        <span>R$ {{ item.productPrice | customCurrency }}</span>
+      </div>
+
+      <div class="delete">
+        <button mat-icon-button>
+          <span class="material-symbols-outlined">delete</span>
+        </button>
+      </div>
+    </div>
+    } @empty {
+    <div class="empty-cart">
+      <span>Nenhum produto no carrinho</span>
+    </div>
+    }
+  </div>
+</div>

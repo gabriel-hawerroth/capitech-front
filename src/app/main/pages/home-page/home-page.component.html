@@ -1,0 +1,13 @@
+<div class="page">
+  <app-products-list
+    [sectionName]="'Em alta'"
+    [sectionIcon]="'whatshot'"
+    [productsList]="trendingProductsList()"
+  ></app-products-list>
+
+  <app-products-list
+    [sectionName]="'Mais vendidos'"
+    [sectionIcon]="'local_fire_department'"
+    [productsList]="bestSellingProductsList()"
+  ></app-products-list>
+</div>

@@ -1,0 +1,96 @@
+<div class="page">
+  @if (!isProductionEnv) {
+  <button class="add-btn" mat-flat-button (click)="openAddProductDialog()">
+    <div class="btn-content">
+      <span class="material-symbols-outlined">add</span>
+      <h3>Adicionar</h3>
+    </div>
+  </button>
+  }
+
+  <div class="content">
+    <form class="filters" [formGroup]="filterForm">
+      <div class="filter name">
+        <span class="filter-title">Nome</span>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="name"
+            autocomplete="off"
+          />
+        </mat-form-field>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="filter price">
+        <span class="filter-title">Preço</span>
+
+        <div class="range">
+          <div class="values">
+            <span>R$ {{ filterForm.value.initialPrice }}</span>
+
+            <span>R$ {{ filterForm.value.finalPrice }}</span>
+          </div>
+
+          <mat-slider min="0" max="50000" style="width: 100%">
+            <input
+              [value]="filterForm.value.initialPrice"
+              matSliderStartThumb
+              formControlName="initialPrice"
+            />
+            <input
+              [value]="filterForm.value.finalPrice"
+              matSliderEndThumb
+              formControlName="finalPrice"
+            />
+          </mat-slider>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="filter category">
+        <span class="filter-title">Categoria</span>
+
+        <mat-form-field appearance="outline">
+          <mat-label style="color: #fff">Categorias</mat-label>
+          <mat-select multiple formControlName="categories">
+            @for (category of categories(); track $index) {
+            <mat-option [value]="category.id">
+              {{ category.description }}
+            </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </form>
+
+    <mat-divider [vertical]="true" style="height: 90%"></mat-divider>
+
+    <div class="list">
+      <app-products-list
+        class="products-list"
+        (updateList)="getProductsList()"
+        (editProduct)="openAddProductDialog($event)"
+        [sectionName]="''"
+        [sectionIcon]="''"
+        [productsList]="products()"
+      ></app-products-list>
+
+      <div class="paginator">
+        <mat-paginator
+          (page)="handlePageEvent($event)"
+          [length]="totalElements()"
+          [pageSize]="pageSize()"
+          [pageSizeOptions]="[5, 10, 25, 50]"
+          aria-label="Select page"
+        >
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

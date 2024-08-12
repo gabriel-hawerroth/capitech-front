@@ -1,0 +1,26 @@
+<div class="basic-dialog">
+  <div class="title">
+    <h3>Alterar o preço</h3>
+  </div>
+
+  <div class="content">
+    <mat-form-field
+      style="width: 90%"
+      appearance="outline"
+      [hideRequiredMarker]="true"
+    >
+      <mat-label>Preço</mat-label>
+      <input type="text" matInput [formControl]="priceCtrl" currencyMask />
+    </mat-form-field>
+  </div>
+
+  <div class="actions">
+    <button
+      mat-raised-button
+      color="primary"
+      [mat-dialog-close]="priceCtrl.value"
+    >
+      Salvar
+    </button>
+  </div>
+</div>

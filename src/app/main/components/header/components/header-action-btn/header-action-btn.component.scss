@@ -1,34 +1,41 @@
 @import '../../../../../shared/styles/colors.scss';
 
-#btn-content {
-    height: 100%;
-    color: $dark-font;
-    display: flex;
-    gap: 0.5rem;
+.mdc-button {
+    padding: 1.6rem 1rem;
+    border-radius: 2rem;
 
-    #icon {
+    .btn-content {
         height: 100%;
+        color: $dark-font;
         display: flex;
-        place-items: center;
-    }
+        align-items: center;
+        gap: 0.5rem;
 
-    #labels {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-
-        #top,
-        #bottom {
-            text-align: start;
+        #icon {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        #top {
-            font-size: 0.7rem;
-        }
+        #labels {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
 
-        #bottom {
-            font-size: 0.9rem;
-            font-weight: bold;
+            #top,
+            #bottom {
+                text-align: start;
+            }
+
+            #top {
+                font-size: 0.7rem;
+            }
+
+            #bottom {
+                font-size: 0.9rem;
+                font-weight: bold;
+            }
         }
     }
 }

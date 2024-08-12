@@ -1,0 +1,68 @@
+@import '../../../../../shared/styles/colors.scss';
+
+#shopping-cart-items-box {
+    width: 100%;
+
+    .items {
+        .empty-cart {
+            padding: 2rem;
+        }
+    }
+
+    .header,
+    .item {
+        width: 100%;
+        display: flex;
+        padding: 1rem;
+        border-bottom: 1px solid #ffffff2c;
+
+        .quantity,
+        .price {
+            display: flex;
+            justify-content: center;
+        }
+
+        .product {
+            width: 60%;
+        }
+
+        .quantity {
+            width: 17%;
+        }
+
+        .price {
+            width: 17%;
+        }
+
+        .delete {
+            width: 6%;
+        }
+    }
+
+    .item {
+        &:last-child {
+            border-bottom: 0px solid #00000000 !important;
+        }
+
+        .product,
+        .quantity,
+        .price,
+        .delete {
+            display: flex;
+            align-items: center;
+        }
+
+        .product {
+            gap: 1rem;
+            padding-right: 1.2rem;
+
+            img {
+                border-radius: .2rem;
+            }
+        }
+
+        .quantity {
+            gap: .8rem;
+        }
+    }
+}

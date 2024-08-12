@@ -1,35 +1,65 @@
-<div class="header">
-  <h1 id="title">CAPITECH</h1>
+<div id="header">
+  <div class="top">
+    <h1 id="title" routerLink="/">CAPITECH</h1>
 
-  <div id="actions">
-    <app-header-action-btn
-      [icon]="'person'"
-      [topLabel]="'MINHA CONTA'"
-      [bottomLabel]="'OLÁ, GABRIEL!'"
-    ></app-header-action-btn>
+    <div id="actions">
+      <app-header-action-btn
+        [icon]="'person'"
+        [topLabel]="''"
+        [bottomLabel]="'MINHA CONTA'"
+      ></app-header-action-btn>
 
-    <app-header-action-btn
-      [icon]="'dark_mode'"
-      [topLabel]="'TEMA'"
-      [bottomLabel]="'ESCURO'"
-    ></app-header-action-btn>
+      <!-- <app-header-action-btn
+        [icon]="'dark_mode'"
+        [topLabel]="'TEMA'"
+        [bottomLabel]="'ESCURO'"
+      ></app-header-action-btn> -->
 
-    <button mat-button id="cart-btn">
-      <div class="btn-content">
-        <div id="icon">
-          <span class="material-symbols-outlined"> shopping_cart </span>
-        </div>
-
-        <div id="labels">
-          <div id="top">
-            <span>CARRINHO</span>
+      <button mat-button id="cart-btn" routerLink="/carrinho">
+        <div class="btn-content">
+          <div id="icon">
+            <span class="material-symbols-outlined"> shopping_cart </span>
           </div>
 
-          <div id="bottom">
-            <span></span>
+          <div id="labels">
+            <div id="top">
+              <span>CARRINHO</span>
+            </div>
+
+            <div id="bottom">
+              <span></span>
+            </div>
           </div>
         </div>
-      </div>
-    </button>
+      </button>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div id="search-category-btn">
+      <button mat-button routerLink="/pesquisa-avancada">
+        <div class="btn-content">
+          <span class="material-symbols-outlined">manage_search</span>
+          <h2>Pesquisar produtos</h2>
+        </div>
+      </button>
+    </div>
+
+    <!-- <div id="search-input">
+      <mat-form-field style="width: 100%">
+        <input
+          type="text"
+          matInput
+          [formControl]="searchInput"
+          maxlength="80"
+          placeholder="Digite o que você procura"
+          spellcheck="false"
+        />
+
+        <button matSuffix mat-icon-button aria-label="Search">
+          <span class="material-symbols-outlined">search</span>
+        </button>
+      </mat-form-field>
+    </div> -->
   </div>
 </div>

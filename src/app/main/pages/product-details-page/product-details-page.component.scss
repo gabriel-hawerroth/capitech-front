@@ -1,0 +1,164 @@
+@import '../../../shared/styles/colors.scss';
+
+.page {
+    display: flex;
+    flex-direction: column;
+    color: $dark-font;
+
+    .top {
+        display: flex;
+        padding: 0 14%;
+
+        .mat-divider {
+            border-color: #9d9d9d9b !important;
+        }
+
+        .imgs {
+            width: 55%;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1.5rem;
+
+            .list {
+                display: flex;
+                flex-direction: column;
+
+                img {
+                    border-radius: .9rem;
+                }
+            }
+
+            .selected-img {
+                img {
+                    border-radius: .3rem;
+                }
+            }
+        }
+
+        .details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: .8rem;
+            padding: 1rem;
+
+            .sub-title {
+                display: flex;
+                gap: .8rem;
+                align-items: center;
+                color: rgb(221, 0, 0);
+                margin-bottom: .2rem;
+            }
+
+
+
+            .payment {
+                display: flex;
+                justify-content: space-between;
+                margin-top: .5rem;
+
+                .price {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    color: $primary-green;
+
+                    .material-symbols-outlined {
+                        font-size: 1.9rem;
+                    }
+
+                    .value {
+                        display: flex;
+                        flex-direction: column;
+
+                        h1 {
+                            font-size: 2rem;
+                        }
+                    }
+                }
+
+                .mdc-button {
+                    padding: 2.4rem 1.9rem;
+                    background-color: $primary-green;
+                    color: #fff;
+
+                    .btn-content {
+                        display: flex;
+                        align-items: center;
+                        gap: 1.4rem;
+
+                        .material-symbols-outlined {
+                            font-size: 2rem;
+                        }
+
+                        .label {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+
+                            h2 {
+                                font-size: 1.8rem;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .credit-card-flags {
+                padding: .2rem 1rem;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+
+                .installments {
+                    display: flex;
+                    font-size: .8rem;
+                    justify-content: space-between;
+                    background-color: #8484843c;
+                    border-radius: .5rem;
+                    padding: .6rem .8rem;
+
+                    .column {
+                        width: 50%;
+                        display: flex;
+                        flex-direction: column;
+                        gap: .2rem;
+                    }
+                }
+
+                .flags {
+                    display: flex;
+                    gap: 1rem;
+                }
+            }
+
+            .characteristcs {
+                padding: .2rem 1rem;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    }
+
+    .about {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 3rem;
+        padding: 0 10%;
+
+        .mat-divider {
+            width: 8%;
+            border-color: $primary-red !important;
+            border-width: 2px;
+            border-radius: 3px;
+            margin: .8rem 0;
+        }
+
+        .description {
+            margin-top: 2.5rem;
+            background-color: $dark-bg;
+        }
+    }
+}

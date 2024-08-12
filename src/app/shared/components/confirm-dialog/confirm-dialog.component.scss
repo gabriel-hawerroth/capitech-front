@@ -1,0 +1,36 @@
+.confirm-dialog {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden !important;
+    max-width: 40vw;
+
+    .title {
+        padding: .8rem;
+        display: flex;
+        align-items: center;
+        font-size: 1.4rem;
+    }
+
+    .content {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        font-size: 1.1rem;
+    }
+
+    .buttons {
+        padding: 1.2rem 0;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+
+        button {
+            padding: 1.4rem;
+            margin-right: 1.2rem;
+        }
+    }
+}

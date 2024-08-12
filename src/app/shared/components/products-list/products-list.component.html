@@ -1,0 +1,82 @@
+<div class="products-list">
+  <div class="title">
+    <span class="material-symbols-outlined">
+      {{ sectionIcon() }}
+    </span>
+
+    <h1>{{ sectionName() }}</h1>
+  </div>
+
+  <div class="list">
+    @for (product of productsList(); track product.id) {
+    <div class="card" (click)="navigate(product.id!, $event)">
+      @if (product.image) {
+      <img
+        [src]="'https://d31xiy6qnxm57r.cloudfront.net/' + product.image"
+        alt="Product image"
+        width="215"
+        height="215"
+        priority
+      />
+      } @else {
+      <img
+        ngSrc="assets/images/no-image-product.svg"
+        alt="Product image"
+        width="215"
+        height="215"
+        priority
+      />
+      }
+
+      <span class="product-title">{{ product.name }}</span>
+
+      <span class="product-price">
+        <span class="price">R$ {{ product.price | customCurrency }}</span>
+
+        @if (!isProductionEnv && !isHomePage) {
+        <button mat-icon-button [matMenuTriggerFor]="menu" class="actions-btn">
+          <span class="material-symbols-outlined">more_vert</span>
+        </button>
+
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="editProduct.emit(product)">
+            Editar
+          </button>
+
+          <button
+            mat-menu-item
+            (click)="openChangePriceDialog(product.id!, product.price)"
+          >
+            Alterar o preço
+          </button>
+
+          <button
+            mat-menu-item
+            (click)="openChangeStockQuantityDialog(product.id!)"
+          >
+            Alterar quantidade em estoque
+          </button>
+
+          <button mat-menu-item (click)="triggerFileInput(product.id!)">
+            Adicionar/alterar a imagem
+          </button>
+
+          <button mat-menu-item (click)="removeImage(product.id!)">
+            Remover a imagem
+          </button>
+        </mat-menu>
+
+        }
+      </span>
+    </div>
+    }
+
+    <input
+      type="file"
+      id="productsListfileInput"
+      (change)="onFileSelected($event)"
+      hidden
+      accept=".jpg,.jpeg,.png,.jfif,.webp"
+    />
+  </div>
+</div>

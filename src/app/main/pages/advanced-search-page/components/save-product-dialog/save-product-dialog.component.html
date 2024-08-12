@@ -1,0 +1,119 @@
+<div class="dialog">
+  <div class="top">
+    <h1>Adicionar produto</h1>
+
+    <button mat-icon-button (click)="closeDialog()">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+  </div>
+
+  <form class="content" [formGroup]="productForm">
+    <div class="row">
+      <mat-form-field
+        style="width: 100%"
+        appearance="outline"
+        [hideRequiredMarker]="true"
+      >
+        <mat-label>Nome</mat-label>
+        <input type="text" matInput formControlName="name" autocomplete="off" />
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field
+        style="width: 50%"
+        appearance="outline"
+        [hideRequiredMarker]="true"
+      >
+        <mat-label>Categoria</mat-label>
+        <mat-select formControlName="category">
+          @for (item of categories; track item.id) {
+          <mat-option [value]="item.id">
+            {{ item.description }}
+          </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field
+        style="width: 50%"
+        appearance="outline"
+        [hideRequiredMarker]="true"
+      >
+        <mat-label>Quantidade em estoque</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="stockQuantity"
+          currencyMask
+          [options]="{ max: 50000, precision: 0 }"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field
+        style="width: 50%"
+        appearance="outline"
+        [hideRequiredMarker]="true"
+      >
+        <mat-label>Preço</mat-label>
+        <input type="text" matInput formControlName="price" currencyMask />
+      </mat-form-field>
+
+      <div class="product-image">
+        @if (!editing) {
+        <input
+          type="file"
+          id="fileInput"
+          (change)="onFileSelected($event)"
+          hidden
+          accept=".jpg,.jpeg,.png,.jfif,.webp"
+        />
+
+        @if (selectedFileName) {
+        <span class="selected-file-name">{{ selectedFileName }}</span>
+
+        <button mat-icon-button (click)="removeSelectedFile()">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+        } @else {
+        <button mat-raised-button (click)="triggerFileInput()">
+          <div class="btn-content">
+            <span class="material-symbols-outlined">upload</span>
+            <span>Carregar imagem</span>
+          </div>
+        </button>
+        } }
+      </div>
+    </div>
+
+    <div class="row">
+      <mat-form-field
+        style="width: 100%"
+        appearance="outline"
+        [hideRequiredMarker]="true"
+      >
+        <mat-label>Descrição</mat-label>
+        <textarea
+          matInput
+          formControlName="description"
+          style="max-height: 40vh !important"
+        ></textarea>
+      </mat-form-field>
+    </div>
+  </form>
+
+  <div class="actions">
+    @if (saving()) {
+    <mat-spinner [diameter]="35"></mat-spinner>
+    } @else {
+    <button mat-raised-button color="primary" (click)="save()">
+      <div class="btn-content">
+        <span class="material-symbols-outlined">save</span>
+        <span>Salvar</span>
+      </div>
+    </button>
+    }
+  </div>
+</div>

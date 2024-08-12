@@ -1,0 +1,96 @@
+@import '../../../shared/styles/colors.scss';
+
+.page {
+    height: 76svh;
+    display: flex;
+    flex-direction: column;
+    padding: 0 10%;
+
+    .title {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+
+        .material-symbols-outlined {
+            color: $primary-red;
+            font-size: 2.8rem;
+        }
+    }
+
+    .infos {
+        display: flex;
+        justify-content: space-between;
+        gap: 2rem;
+
+        .details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 1.5rem;
+
+            .shipping-card {
+                width: 50%;
+                padding: 1rem;
+                padding-bottom: .5rem;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+
+                .calculate {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    * {
+                        border-color: #fff !important;
+                    }
+                }
+            }
+        }
+
+        .summary {
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            h2 {
+                margin: 1.2rem 0;
+            }
+
+            .mat-divider {
+                width: 100%;
+                border-color: #ffffff29;
+            }
+
+            .total {
+                width: 100%;
+                padding: 1rem 0;
+                display: flex;
+                justify-content: space-evenly;
+                background-color: #ffffff29;
+                font-size: 1.8rem;
+            }
+
+            .value {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: .3rem;
+                padding: 1.5rem 0;
+                color: $primary-green;
+            }
+
+            #conclude-purchase-btn {
+                background-color: $primary-green;
+                color: #fff;
+                padding: 2rem;
+                margin-top: 1.2rem;
+                margin-bottom: 2rem;
+            }
+        }
+    }
+}

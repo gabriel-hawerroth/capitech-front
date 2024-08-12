@@ -1,0 +1,32 @@
+<div class="page">
+  <div class="title">
+    <span class="material-symbols-outlined">history</span>
+    <span class="label">SEU HISTÓRICO DE NAVEGAÇÃO</span>
+  </div>
+
+  <div class="list">
+    @for (product of products(); track product.id) {
+    <!--  -->
+    @if (product.image) {
+    <img
+      [ngSrc]="'https://d31xiy6qnxm57r.cloudfront.net/' + product.image"
+      alt="Product image"
+      width="130"
+      height="130"
+      priority
+      [routerLink]="'/product/' + product.id"
+      [matTooltip]="product.name"
+    />
+    } @else {
+    <img
+      ngSrc="assets/images/no-image-product.svg"
+      alt="Product image"
+      width="130"
+      height="130"
+      [routerLink]="'/product/' + product.id"
+      (click)="selectItem(product.id)"
+      [matTooltip]="product.name"
+    />
+    } }
+  </div>
+</div>

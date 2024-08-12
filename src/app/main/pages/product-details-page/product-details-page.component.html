@@ -1,0 +1,137 @@
+<div class="page">
+  <div class="top">
+    <div class="imgs">
+      <div class="list">
+        @if (product()?.image) {
+        <img
+          [ngSrc]="'https://d31xiy6qnxm57r.cloudfront.net/' + product()!.image"
+          alt="Product image"
+          width="145"
+          height="145"
+          priority
+        />
+        } @else {
+        <img
+          ngSrc="assets/images/no-image-product.svg"
+          alt="Product image"
+          width="145"
+          height="145"
+        />
+        }
+      </div>
+
+      <div class="selected-img">
+        @if (product() != null) { @if (product()!.image) {
+        <img
+          [ngSrc]="'https://d31xiy6qnxm57r.cloudfront.net/' + product()!.image"
+          alt="Product image"
+          width="650"
+          height="650"
+          priority
+        />
+        } @else {
+        <img
+          ngSrc="assets/images/no-image-product.svg"
+          alt="Product image"
+          width="650"
+          height="650"
+        />
+        } }
+      </div>
+    </div>
+
+    <div class="details">
+      <h1>{{ product()?.name }}</h1>
+
+      <mat-divider></mat-divider>
+
+      <div class="payment">
+        <div class="price">
+          <span class="material-symbols-outlined">payments</span>
+
+          <div class="value">
+            <span>à vista</span>
+
+            @if (product()?.price) {
+            <h1>R$ {{ product()!.price | customCurrency }}</h1>
+            }
+          </div>
+        </div>
+
+        <button mat-flat-button>
+          <div class="btn-content">
+            <span class="material-symbols-outlined">add_shopping_cart</span>
+
+            <div class="label">
+              <h2>COMPRAR</h2>
+              <span>Adicionar ao carrinho</span>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="credit-card-flags">
+        <div class="sub-title">
+          <span class="material-symbols-outlined">credit_card</span>
+          <h3>Bandeiras aceitas</h3>
+        </div>
+
+        <div class="installments">
+          <div class="column">
+            @for (item of firtColumnInstallments; track $index) {
+            <span>{{ getInstallmentLabel(item) }}</span>
+            }
+          </div>
+
+          <div class="column">
+            @for (item of secondColumnInstallments; track $index) {
+            <span>{{ getInstallmentLabel(item) }}</span>
+            }
+          </div>
+        </div>
+
+        <div class="flags">
+          @for (item of creditCardFlags; track $index) {
+          <img
+            [ngSrc]="'assets/images/credit_card_flags/' + item + '.webp'"
+            alt="Accepted credit card flag"
+            width="50"
+            height="30"
+          />
+          }
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="characteristcs">
+        <div class="sub-title">
+          <span class="material-symbols-outlined">verified</span>
+          <h3>Características</h3>
+        </div>
+
+        <div class="characteristcs-content">
+          <span>Garantia: 12 meses</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about">
+    <mat-divider></mat-divider>
+
+    <h1>Sobre</h1>
+
+    <div class="description" [innerHTML]="htmlDescription"></div>
+
+    <mat-divider style="margin-top: 2rem"></mat-divider>
+  </div>
+
+  <div class="navigation-history">
+    <app-user-navigation-history
+      (onSelectItem)="ngOnInit()"
+    ></app-user-navigation-history>
+  </div>
+</div>

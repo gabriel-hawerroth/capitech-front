@@ -1,0 +1,71 @@
+<div class="page">
+  <div class="title">
+    <span class="material-symbols-outlined">shopping_cart</span>
+    <h2>MEU CARRINHO</h2>
+  </div>
+
+  <div class="infos">
+    <div class="details">
+      <app-shopping-cart-items-list
+        [cartItems]="cartItems()"
+        style="width: 100%"
+      ></app-shopping-cart-items-list>
+
+      <button mat-flat-button>
+        <div class="btn-content" style="font-size: 0.92rem">
+          <span class="material-symbols-outlined">delete</span>
+          <span>LIMPAR CARRINHO</span>
+        </div>
+      </button>
+
+      <div class="shipping-card dark-card">
+        <h2>Fretes e Prazos</h2>
+
+        <div class="calculate">
+          <mat-form-field appearance="outline">
+            <mat-label>CEP</mat-label>
+            <input
+              type="text"
+              matInput
+              [formControl]="cepControl"
+              mask="00000-000"
+            />
+          </mat-form-field>
+
+          <button mat-flat-button style="font-size: 0.92rem">
+            <div class="btn-content">
+              <span class="material-symbols-outlined">local_shipping</span>
+              <span>CALCULAR</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary dark-card">
+      <h2>Resumo</h2>
+
+      <mat-divider></mat-divider>
+
+      <div class="total">
+        <span>Total</span>
+
+        <span>R$ {{ purchaseTotalPrice() | customCurrency }}</span>
+      </div>
+
+      <div class="value">
+        <span>à vista</span>
+        <span class="price" style="font-size: 2rem; font-weight: bold">
+          R$ {{ purchaseTotalPrice() | customCurrency }}
+        </span>
+      </div>
+
+      <button mat-raised-button id="conclude-purchase-btn">
+        <div class="btn-content">
+          <span class="material-symbols-outlined">shopping_cart</span>
+          <span>FINALIZAR PEDIDO</span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+@import '../../../shared/styles/colors.scss';
+
+.page {
+    padding: 1.5rem 10%;
+
+    .title {
+        display: flex;
+        align-items: center;
+        gap: .7rem;
+        font-size: 1.1rem;
+
+        .material-symbols-outlined {
+            color: $primary-red;
+            font-size: 2rem !important;
+        }
+    }
+
+    .list {
+        padding: 1.5rem;
+        display: flex;
+        gap: 2rem;
+
+        img {
+            border-radius: 50%;
+            opacity: 80%;
+            cursor: pointer;
+
+            &:hover {
+                opacity: 100%;
+            }
+        }
+    }
+}
