@@ -73,9 +73,9 @@ export class ProductService {
     );
   }
 
-  save(dto: CreateProductDTO): Promise<Product> {
+  create(dto: CreateProductDTO): Promise<Product> {
     return lastValueFrom(
-      this._http.post<Product>(`${this.apiUrl}entities/${this.entity}`, dto)
+      this._http.post<Product>(`${this.apiUrl}/${this.entity}`, dto)
     );
   }
 

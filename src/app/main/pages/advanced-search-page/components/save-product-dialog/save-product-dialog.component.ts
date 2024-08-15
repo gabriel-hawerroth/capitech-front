@@ -82,8 +82,8 @@ export class SaveProductDialog implements OnInit {
       name: ['', Validators.required],
       description: ['', Validators.required],
       price: [0, Validators.required],
-      category: ['', Validators.required],
-      stockQuantity: [0, Validators.required],
+      category_id: [1, Validators.required],
+      stock_quantity: [0, Validators.required],
     });
   }
 
@@ -130,7 +130,7 @@ export class SaveProductDialog implements OnInit {
     this.saving.set(true);
     try {
       await this._productService
-        .save(this.getSaveProductDTO)
+        .create(this.getSaveProductDTO)
         .then(async (product) => {
           this._utils.showMessage('Produto salvo com sucesso', 4000);
 
@@ -188,10 +188,8 @@ export class SaveProductDialog implements OnInit {
       name: formData.name,
       description: formData.description,
       price: formData.price,
-      category: {
-        id: formData.category,
-      },
-      stockQuantity: formData.stockQuantity,
+      category_id: formData.category_id,
+      stock_quantity: formData.stock_quantity,
     };
   }
 }

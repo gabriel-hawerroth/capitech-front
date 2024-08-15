@@ -24,14 +24,13 @@ export class HomePage implements OnInit {
   bestSellingProductsList = signal<HomeProductDTO[]>([]);
 
   ngOnInit(): void {
-    this._productService
-      .getTrendingProducts()
-      .then((response) => this.trendingProductsList.set(response.productsList));
-
-    this._productService
-      .getBestSellingProducts()
-      .then((response) =>
-        this.bestSellingProductsList.set(response.productsList)
-      );
+    // this._productService
+    //   .getTrendingProducts()
+    //   .then((response) => this.trendingProductsList.set(response.productsList));
+    // this._productService
+    //   .getBestSellingProducts()
+    //   .then((response) =>
+    //     this.bestSellingProductsList.set(response.productsList)
+    //   );
   }
 }

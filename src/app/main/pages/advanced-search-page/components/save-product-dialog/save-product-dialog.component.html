@@ -26,7 +26,7 @@
         [hideRequiredMarker]="true"
       >
         <mat-label>Categoria</mat-label>
-        <mat-select formControlName="category">
+        <mat-select formControlName="category_id">
           @for (item of categories; track item.id) {
           <mat-option [value]="item.id">
             {{ item.description }}
@@ -44,7 +44,7 @@
         <input
           type="text"
           matInput
-          formControlName="stockQuantity"
+          formControlName="stock_quantity"
           currencyMask
           [options]="{ max: 50000, precision: 0 }"
         />

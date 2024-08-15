@@ -70,8 +70,8 @@ export class AdvancedSearchPage implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
-    this.getCategories();
-    this.getProductsList();
+    // this.getCategories();
+    // this.getProductsList();
   }
 
   buildForm() {

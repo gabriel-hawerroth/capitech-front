@@ -31,8 +31,8 @@ export interface CreateProductDTO {
   name: string;
   description: string;
   price: number;
-  category: CategoryId;
-  stockQuantity: number;
+  category_id: number;
+  stock_quantity: number;
 }
 
 export interface UpdateProductDTO {
