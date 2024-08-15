@@ -11,9 +11,11 @@ import {
   GetProductCrudL,
   HomeProductListDTO,
   Product,
+  ProductQueryParams,
   RemoveProductDTO,
   UpdateProductDTO,
 } from '../interfaces/products';
+import { Category } from '../interfaces/category';
 
 @Injectable({
   providedIn: 'root',
@@ -46,6 +48,19 @@ export class ProductService {
       this._http.get<GetProductCrudL>(`${this.apiUrl}entities/${this.entity}`, {
         params,
       })
+    );
+  }
+
+  getFilteredProducts(queryParams: ProductQueryParams): Promise<Category[]> {
+    let params = new HttpParams();
+    params = params.append('filters', JSON.stringify(queryParams.filters));
+    params = params.append(
+      'pagination',
+      JSON.stringify(queryParams.pagination)
+    );
+
+    return lastValueFrom(
+      this._http.get<Category[]>(`${this.apiUrl}/${this.entity}`, { params })
     );
   }
 

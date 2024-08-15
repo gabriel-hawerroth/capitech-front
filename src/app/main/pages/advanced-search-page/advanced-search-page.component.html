@@ -31,21 +31,21 @@
 
         <div class="range">
           <div class="values">
-            <span>R$ {{ filterForm.value.initialPrice }}</span>
+            <span>R$ {{ filterForm.value.minPrice }}</span>
 
-            <span>R$ {{ filterForm.value.finalPrice }}</span>
+            <span>R$ {{ filterForm.value.maxPrice }}</span>
           </div>
 
           <mat-slider min="0" max="50000" style="width: 100%">
             <input
-              [value]="filterForm.value.initialPrice"
+              [value]="filterForm.value.minPrice"
               matSliderStartThumb
-              formControlName="initialPrice"
+              formControlName="minPrice"
             />
             <input
-              [value]="filterForm.value.finalPrice"
+              [value]="filterForm.value.maxPrice"
               matSliderEndThumb
-              formControlName="finalPrice"
+              formControlName="maxPrice"
             />
           </mat-slider>
         </div>

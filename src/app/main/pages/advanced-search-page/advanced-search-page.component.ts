@@ -59,8 +59,8 @@ export class AdvancedSearchPage implements OnInit {
   categories = signal<Category[]>([]);
   products = signal<Product[]>([]);
 
-  initialPriceFilter = new FormControl(0);
-  finalPriceFilter = new FormControl(50000);
+  minPriceFilter = new FormControl(0);
+  maxPriceFilter = new FormControl(50000);
 
   filterForm!: FormGroup;
 
@@ -70,15 +70,15 @@ export class AdvancedSearchPage implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
-    // this.getCategories();
+    this.getCategories();
     // this.getProductsList();
   }
 
   buildForm() {
     this.filterForm = this._fb.group({
       name: '',
-      initialPrice: 0,
-      finalPrice: 50000,
+      minPrice: 0,
+      maxPrice: 50000,
       categories: [],
     });
 
@@ -89,7 +89,7 @@ export class AdvancedSearchPage implements OnInit {
 
   getCategories() {
     this._categoryService.getList().then((response) => {
-      this.categories.set(response.contents);
+      this.categories.set(response);
     });
   }
 
@@ -110,9 +110,9 @@ export class AdvancedSearchPage implements OnInit {
       filter = this.concatFilterParam(filter);
     }
 
-    filter = `${filter} price gt '${filters.initialPrice}'`;
+    filter = `${filter} price gt '${filters.minPrice}'`;
     filter = this.concatFilterParam(filter);
-    filter = `${filter} price lt '${filters.finalPrice}'`;
+    filter = `${filter} price lt '${filters.maxPrice}'`;
 
     if (filters.categories && filters.categories.length != 0) {
       const categoriesId: string[] = filters.categories;

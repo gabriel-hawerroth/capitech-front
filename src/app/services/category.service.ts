@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { GetCategoryCrudL } from '../interfaces/category';
+import { Category, GetCategoryCrudL } from '../interfaces/category';
 import { GetCrudL } from '../interfaces/generic';
 
 @Injectable({
@@ -10,13 +10,13 @@ import { GetCrudL } from '../interfaces/generic';
 })
 export class CategoryService {
   private apiUrl = environment.baseApiUrl;
-  private entity = 'productCategory';
+  private entity = 'category';
 
   private readonly _http = inject(HttpClient);
 
-  getList(): Promise<GetCategoryCrudL> {
+  getList(): Promise<Category[]> {
     return lastValueFrom(
-      this._http.get<GetCrudL>(`${this.apiUrl}entities/${this.entity}`)
+      this._http.get<Category[]>(`${this.apiUrl}/${this.entity}`)
     );
   }
 }

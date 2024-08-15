@@ -10,3 +10,8 @@ export interface GetCrudL {
   totalElements: number;
   contents: any[];
 }
+
+export interface Pagination {
+  page: number;
+  size: number;
+}

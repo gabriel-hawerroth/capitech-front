@@ -1,6 +1,6 @@
 import { UUID } from 'crypto';
 import { Category } from './category';
-import { GetCrudL } from './generic';
+import { GetCrudL, Pagination } from './generic';
 
 export interface Product {
   id?: UUID;
@@ -10,6 +10,18 @@ export interface Product {
   category: Category;
   stockQuantity: number;
   image: string;
+}
+
+export interface ProductFilter {
+  name: string;
+  minPrice: number;
+  maxPrice: number;
+  categories: number[];
+}
+
+export interface ProductQueryParams {
+  filters: ProductFilter;
+  pagination: Pagination;
 }
 
 export interface GetProductCrudL extends GetCrudL {
@@ -38,10 +50,6 @@ export interface CreateProductDTO {
 export interface UpdateProductDTO {
   productId: UUID;
   product: CreateProductDTO;
-}
-
-interface CategoryId {
-  id: UUID;
 }
 
 export interface ChangeProductPriceDTO {
