@@ -1,9 +1,8 @@
-import { UUID } from 'crypto';
 import { Category } from './category';
 import { GetCrudL, Pagination } from './generic';
 
 export interface Product {
-  id?: UUID;
+  id?: number;
   name: string;
   description: string;
   price: number;
@@ -33,13 +32,13 @@ export interface HomeProductListDTO {
 }
 
 export interface HomeProductDTO {
-  id: UUID;
+  id: number;
   name: string;
   price: number;
   image: string;
 }
 
-export interface CreateProductDTO {
+export interface SaveProductDTO {
   name: string;
   description: string;
   price: number;
@@ -47,26 +46,17 @@ export interface CreateProductDTO {
   stock_quantity: number;
 }
 
-export interface UpdateProductDTO {
-  productId: UUID;
-  product: CreateProductDTO;
-}
-
 export interface ChangeProductPriceDTO {
-  productId: UUID;
+  productId: number;
   price: number;
 }
 
 export interface ChangeProductStockQuantityDTO {
-  productId: UUID;
+  productId: number;
   stockQuantity: number;
 }
 
 export interface ChangeProductImageDTO {
-  productId: UUID;
+  productId: number;
   image: string;
-}
-
-export interface RemoveProductDTO {
-  productId: string;
 }

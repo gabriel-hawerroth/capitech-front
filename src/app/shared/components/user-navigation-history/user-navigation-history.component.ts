@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
-import { UUID } from 'crypto';
 import { HomeProductDTO } from '../../../interfaces/products';
 import { ProductService } from '../../../services/product.service';
 
@@ -22,7 +21,7 @@ import { ProductService } from '../../../services/product.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserNavigationHistoryComponent implements OnInit {
-  onSelectItem = output<UUID>();
+  onSelectItem = output<number>();
 
   private readonly _productService = inject(ProductService);
 
@@ -34,9 +33,8 @@ export class UserNavigationHistoryComponent implements OnInit {
     });
   }
 
-  selectItem(id: UUID) {
+  selectItem(id: number) {
     this.onSelectItem.emit(id);
-    this.products.set([]);
     this.ngOnInit();
   }
 }

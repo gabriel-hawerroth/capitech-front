@@ -18,13 +18,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
-import { UUID } from 'crypto';
 import { NgxCurrencyDirective } from 'ngx-currency';
 import { Category } from '../../../../../interfaces/category';
-import {
-  CreateProductDTO,
-  UpdateProductDTO,
-} from '../../../../../interfaces/products';
+import { SaveProductDTO } from '../../../../../interfaces/products';
 import { ProductService } from '../../../../../services/product.service';
 import { UtilsService } from '../../../../../utils/utils.service';
 
@@ -62,7 +58,7 @@ export class SaveProductDialog implements OnInit {
   saving = signal(false);
 
   editing = this._data.editing;
-  editingProductId: UUID | null = null;
+  editingProductId: number | null = null;
 
   ngOnInit(): void {
     this.buildForm();
@@ -151,37 +147,30 @@ export class SaveProductDialog implements OnInit {
       .finally(() => this.saving.set(false));
   }
 
-  async update() {
+  update() {
     if (this.productForm.invalid) {
       this._utils.showMessage('Formulário inválido');
       return;
     }
 
     this.saving.set(true);
-    try {
-      const dto: UpdateProductDTO = {
-        productId: this.editingProductId!,
-        product: this.getSaveProductDTO,
-      };
 
-      await this._productService
-        .edit(dto)
-        .then(() => {
-          this._utils.showMessage('Produto atualizado com sucesso', 4000);
-          this._dialogRef.close(true);
-        })
-        .catch(() => {
-          this._utils.showMessage('Erro ao atualizar o produto');
-        });
-    } finally {
-      this.saving.set(false);
-    }
+    this._productService
+      .edit(this.editingProductId!, this.getSaveProductDTO)
+      .then(() => {
+        this._utils.showMessage('Produto atualizado com sucesso', 4000);
+        this._dialogRef.close(true);
+      })
+      .catch(() => {
+        this._utils.showMessage('Erro ao atualizar o produto');
+      })
+      .finally(() => this.saving.set(false));
   }
 
-  get getSaveProductDTO(): CreateProductDTO {
+  get getSaveProductDTO(): SaveProductDTO {
     const formData = this.productForm.getRawValue();
 
-    return <CreateProductDTO>{
+    return <SaveProductDTO>{
       name: formData.name,
       description: formData.description,
       price: formData.price,

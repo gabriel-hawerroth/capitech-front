@@ -46,7 +46,7 @@ export class ProductsListComponent implements OnInit {
   isProductionEnv = environment.production;
   isHomePage = true;
 
-  selectedProductId: UUID | null = null;
+  selectedProductId: number | null = null;
 
   ngOnInit(): void {
     const currentRoute = this._activatedRoute.snapshot.url
@@ -56,7 +56,7 @@ export class ProductsListComponent implements OnInit {
     this.isHomePage = currentRoute === '';
   }
 
-  navigate(productId: UUID, event: Event) {
+  navigate(productId: number, event: Event) {
     const clickedOnActionsBtn = (event.target as HTMLElement).closest(
       '.actions-btn'
     );
@@ -65,7 +65,7 @@ export class ProductsListComponent implements OnInit {
     this._router.navigateByUrl('/product/' + productId);
   }
 
-  openChangePriceDialog(productId: UUID, actualPrice: number) {
+  openChangePriceDialog(productId: number, actualPrice: number) {
     lastValueFrom(
       this._matDialog
         .open(ChangeProductPriceDialog, {
@@ -93,7 +93,7 @@ export class ProductsListComponent implements OnInit {
     });
   }
 
-  openChangeStockQuantityDialog(productId: UUID) {
+  openChangeStockQuantityDialog(productId: number) {
     lastValueFrom(
       this._matDialog
         .open(ChangeProductStockQuantityDialog, {
@@ -122,7 +122,7 @@ export class ProductsListComponent implements OnInit {
     });
   }
 
-  triggerFileInput(productId: UUID) {
+  triggerFileInput(productId: number) {
     this.selectedProductId = productId;
 
     const fileInput = document.getElementById(
@@ -158,7 +158,7 @@ export class ProductsListComponent implements OnInit {
     }
   }
 
-  removeImage(productId: UUID) {
+  removeImage(productId: number) {
     this._utils
       .showConfirmDialog('Deseja realmente excluir a imagem desse produto?')
       .then((response) => {

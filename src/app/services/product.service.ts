@@ -1,6 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { UUID } from 'crypto';
 import { lastValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { PaginationResponse } from '../interfaces/generic';
@@ -8,12 +7,10 @@ import {
   ChangeProductImageDTO,
   ChangeProductPriceDTO,
   ChangeProductStockQuantityDTO,
-  CreateProductDTO,
+  SaveProductDTO,
   HomeProductListDTO,
   Product,
   ProductQueryParams,
-  RemoveProductDTO,
-  UpdateProductDTO,
 } from '../interfaces/products';
 
 @Injectable({
@@ -65,29 +62,29 @@ export class ProductService {
     );
   }
 
-  create(dto: CreateProductDTO): Promise<Product> {
+  create(dto: SaveProductDTO): Promise<Product> {
     return lastValueFrom(this._http.post<Product>(`${this.apiUrl}`, dto));
   }
 
-  edit(dto: UpdateProductDTO): Promise<Product> {
+  edit(productId: number, dto: SaveProductDTO): Promise<Product> {
     return lastValueFrom(
-      this._http.post<Product>(`${this.apiUrl}/updateProductCustom`, dto)
+      this._http.put<Product>(`${this.apiUrl}/${productId}`, dto)
     );
   }
 
-  changePrice(productId: UUID, price: number): Promise<Product> {
+  changePrice(productId: number, price: number): Promise<Product> {
     const dto: ChangeProductPriceDTO = {
       productId,
       price,
     };
 
     return lastValueFrom(
-      this._http.post<Product>(`${this.apiUrl}/editProductPrice`, dto)
+      this._http.put<Product>(`${this.apiUrl}/editProductPrice`, dto)
     );
   }
 
   changeStockQuantity(
-    productId: UUID,
+    productId: number,
     stockQuantity: number
   ): Promise<Product> {
     const dto: ChangeProductStockQuantityDTO = {
@@ -100,7 +97,7 @@ export class ProductService {
     );
   }
 
-  changeImage(productId: UUID, image: string): Promise<Product> {
+  changeImage(productId: number, image: string): Promise<Product> {
     const dto: ChangeProductImageDTO = {
       productId,
       image,
@@ -113,13 +110,12 @@ export class ProductService {
     );
   }
 
-  removeImage(productId: UUID): Promise<Product> {
-    const dto: RemoveProductDTO = {
-      productId,
-    };
-
+  removeImage(productId: number): Promise<Product> {
     return lastValueFrom(
-      this._http.post<Product>(`${this.apiUrl}/removeProductImage`, dto)
+      this._http.put<Product>(
+        `${this.apiUrl}/removeProductImage${productId}`,
+        null
+      )
     );
   }
 }

@@ -74,8 +74,8 @@
     <div class="list">
       <app-products-list
         class="products-list"
-        [sectionName]="''"
-        [sectionIcon]="''"
+        sectionName=""
+        sectionIcon=""
         [productsList]="products()"
         (updateList)="getFilteredProductsList()"
         (editProduct)="openAddProductDialog($event)"
