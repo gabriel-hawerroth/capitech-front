@@ -9,7 +9,6 @@ import {
   ChangeProductPriceDTO,
   ChangeProductStockQuantityDTO,
   CreateProductDTO,
-  GetProductCrudL,
   HomeProductListDTO,
   Product,
   ProductQueryParams,
@@ -21,34 +20,12 @@ import {
   providedIn: 'root',
 })
 export class ProductService {
-  private readonly apiUrl = environment.baseApiUrl;
-  private readonly entity = 'product';
+  private readonly apiUrl = `${environment.baseApiUrl}/product`;
 
   private readonly _http = inject(HttpClient);
 
-  getById(id: string): Promise<Product> {
-    return lastValueFrom(
-      this._http.get<Product>(`${this.apiUrl}entities/${this.entity}/${id}`)
-    );
-  }
-
-  getCrudl(
-    filter: string = '',
-    orderBy: string = '',
-    pageNumber: number = 0,
-    pageSize: number = 10
-  ): Promise<GetProductCrudL> {
-    let params = new HttpParams();
-    params = params.append('filter', filter);
-    params = params.append('orderby', orderBy);
-    params = params.append('offset', pageNumber);
-    params = params.append('size', pageSize);
-
-    return lastValueFrom(
-      this._http.get<GetProductCrudL>(`${this.apiUrl}entities/${this.entity}`, {
-        params,
-      })
-    );
+  getById(id: number): Promise<Product> {
+    return lastValueFrom(this._http.get<Product>(`${this.apiUrl}/${id}`));
   }
 
   getFilteredProducts(
@@ -62,17 +39,14 @@ export class ProductService {
     );
 
     return lastValueFrom(
-      this._http.get<PaginationResponse<Product>>(
-        `${this.apiUrl}/${this.entity}`,
-        { params }
-      )
+      this._http.get<PaginationResponse<Product>>(`${this.apiUrl}`, { params })
     );
   }
 
   getTrendingProducts(): Promise<HomeProductListDTO> {
     return lastValueFrom(
       this._http.get<HomeProductListDTO>(
-        `${this.apiUrl}queries/getTrendingProductsList`
+        `${this.apiUrl}/getTrendingProductsList`
       )
     );
   }
@@ -80,28 +54,24 @@ export class ProductService {
   getBestSellingProducts(): Promise<HomeProductListDTO> {
     return lastValueFrom(
       this._http.get<HomeProductListDTO>(
-        `${this.apiUrl}queries/getBestSellingProductsList`
+        `${this.apiUrl}/getBestSellingProductsList`
       )
     );
   }
 
   getUserSearchHistory(): Promise<HomeProductListDTO> {
     return lastValueFrom(
-      this._http.get<HomeProductListDTO>(
-        `${this.apiUrl}queries/getUserSearchHistory`
-      )
+      this._http.get<HomeProductListDTO>(`${this.apiUrl}/getUserSearchHistory`)
     );
   }
 
   create(dto: CreateProductDTO): Promise<Product> {
-    return lastValueFrom(
-      this._http.post<Product>(`${this.apiUrl}/${this.entity}`, dto)
-    );
+    return lastValueFrom(this._http.post<Product>(`${this.apiUrl}`, dto));
   }
 
   edit(dto: UpdateProductDTO): Promise<Product> {
     return lastValueFrom(
-      this._http.post<Product>(`${this.apiUrl}actions/updateProductCustom`, dto)
+      this._http.post<Product>(`${this.apiUrl}/updateProductCustom`, dto)
     );
   }
 
@@ -112,7 +82,7 @@ export class ProductService {
     };
 
     return lastValueFrom(
-      this._http.post<Product>(`${this.apiUrl}actions/editProductPrice`, dto)
+      this._http.post<Product>(`${this.apiUrl}/editProductPrice`, dto)
     );
   }
 
@@ -126,10 +96,7 @@ export class ProductService {
     };
 
     return lastValueFrom(
-      this._http.post<Product>(
-        `${this.apiUrl}actions/editProductStockQuantity`,
-        dto
-      )
+      this._http.post<Product>(`${this.apiUrl}/editProductStockQuantity`, dto)
     );
   }
 
@@ -142,7 +109,7 @@ export class ProductService {
     console.log(dto);
 
     return lastValueFrom(
-      this._http.post<Product>(`${this.apiUrl}actions/changeProductImage`, dto)
+      this._http.post<Product>(`${this.apiUrl}/changeProductImage`, dto)
     );
   }
 
@@ -152,7 +119,7 @@ export class ProductService {
     };
 
     return lastValueFrom(
-      this._http.post<Product>(`${this.apiUrl}actions/removeProductImage`, dto)
+      this._http.post<Product>(`${this.apiUrl}/removeProductImage`, dto)
     );
   }
 }

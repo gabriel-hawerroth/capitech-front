@@ -42,7 +42,9 @@ export class ProductDetailsPage implements OnInit {
   private readonly _router = inject(Router);
   private readonly _sanitizer = inject(DomSanitizer);
 
-  productId: string | null = null;
+  productId: number | null =
+    +this._activatedRoute.snapshot.paramMap.get('product-id')! || null;
+
   product = signal<Product | null>(null);
 
   creditCardFlags = ['visa', 'mastercard', 'dn', 'ae', 'elo', 'hiper'];
@@ -52,10 +54,7 @@ export class ProductDetailsPage implements OnInit {
   htmlDescription?: SafeHtml;
 
   ngOnInit(): void {
-    this._activatedRoute.params.subscribe((params: Params) => {
-      this.productId = params['product-id'];
-      this.loadProductDetails();
-    });
+    this.loadProductDetails();
   }
 
   loadProductDetails() {

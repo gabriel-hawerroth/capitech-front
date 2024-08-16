@@ -11,30 +11,23 @@ import {
   providedIn: 'root',
 })
 export class ShoppingCartService {
-  private readonly apiUrl = environment.baseApiUrl;
-  private readonly entity = 'shoppingCart';
+  private readonly apiUrl = `${environment.baseApiUrl}/shoppingCart`;
 
   private readonly _http = inject(HttpClient);
 
-  addProduct(productId: string, quantity: number): Promise<any> {
+  addProduct(productId: number, quantity: number): Promise<any> {
     quantity = Math.round(quantity);
 
     const dto: CreateShoppingCartDTO = {
-      product: {
-        id: productId,
-      },
+      productId,
       quantity,
     };
-    return lastValueFrom(
-      this._http.post(`${this.apiUrl}entities/${this.entity}`, dto)
-    );
+    return lastValueFrom(this._http.post(`${this.apiUrl}`, dto));
   }
 
   getUserShoppingCart(): Promise<ShoppingCartList> {
     return lastValueFrom(
-      this._http.get<ShoppingCartList>(
-        `${this.apiUrl}queries/getUserShoppingCart`
-      )
+      this._http.get<ShoppingCartList>(`${this.apiUrl}/getUserShoppingCart`)
     );
   }
 }

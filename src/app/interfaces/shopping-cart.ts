@@ -8,12 +8,8 @@ export interface ShoppingCart {
 }
 
 export interface CreateShoppingCartDTO {
-  product: ProductId;
+  productId: number;
   quantity: number;
-}
-
-interface ProductId {
-  id: string;
 }
 
 export interface ShoppingCartList {
