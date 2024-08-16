@@ -15,3 +15,8 @@ export interface Pagination {
   page: number;
   size: number;
 }
+
+export interface PaginationResponse<T> {
+  content: T[];
+  totalItems: number;
+}

@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { UUID } from 'crypto';
 import { lastValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { PaginationResponse } from '../interfaces/generic';
 import {
   ChangeProductImageDTO,
   ChangeProductPriceDTO,
@@ -15,7 +16,6 @@ import {
   RemoveProductDTO,
   UpdateProductDTO,
 } from '../interfaces/products';
-import { Category } from '../interfaces/category';
 
 @Injectable({
   providedIn: 'root',
@@ -51,7 +51,9 @@ export class ProductService {
     );
   }
 
-  getFilteredProducts(queryParams: ProductQueryParams): Promise<Category[]> {
+  getFilteredProducts(
+    queryParams: ProductQueryParams
+  ): Promise<PaginationResponse<Product>> {
     let params = new HttpParams();
     params = params.append('filters', JSON.stringify(queryParams.filters));
     params = params.append(
@@ -60,7 +62,10 @@ export class ProductService {
     );
 
     return lastValueFrom(
-      this._http.get<Category[]>(`${this.apiUrl}/${this.entity}`, { params })
+      this._http.get<PaginationResponse<Product>>(
+        `${this.apiUrl}/${this.entity}`,
+        { params }
+      )
     );
   }
 

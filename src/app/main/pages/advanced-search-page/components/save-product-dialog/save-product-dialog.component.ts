@@ -121,37 +121,34 @@ export class SaveProductDialog implements OnInit {
     }
   }
 
-  async create() {
+  create() {
     if (this.productForm.invalid) {
       this._utils.showMessage('Formulário inválido');
       return;
     }
 
     this.saving.set(true);
-    try {
-      await this._productService
-        .create(this.getSaveProductDTO)
-        .then(async (product) => {
-          this._utils.showMessage('Produto salvo com sucesso', 4000);
+    this._productService
+      .create(this.getSaveProductDTO)
+      .then(async (product) => {
+        this._utils.showMessage('Produto salvo com sucesso', 4000);
 
-          if (this.productImageByte64 != null) {
-            await this._productService
-              .changeImage(product.id!, this.productImageByte64)
-              .catch(() => {
-                this._utils.showMessage(
-                  'Houve um erro ao salvar a imagem do produto'
-                );
-              });
-          }
+        if (this.productImageByte64 != null) {
+          await this._productService
+            .changeImage(product.id!, this.productImageByte64)
+            .catch(() => {
+              this._utils.showMessage(
+                'Houve um erro ao salvar a imagem do produto'
+              );
+            });
+        }
 
-          this._dialogRef.close(true);
-        })
-        .catch(() => {
-          this._utils.showMessage('Erro ao salvar o produto');
-        });
-    } finally {
-      this.saving.set(false);
-    }
+        this._dialogRef.close(true);
+      })
+      .catch(() => {
+        this._utils.showMessage('Erro ao salvar o produto');
+      })
+      .finally(() => this.saving.set(false));
   }
 
   async update() {

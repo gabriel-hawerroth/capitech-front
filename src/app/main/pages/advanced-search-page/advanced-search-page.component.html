@@ -74,22 +74,21 @@
     <div class="list">
       <app-products-list
         class="products-list"
-        (updateList)="getProductsList()"
-        (editProduct)="openAddProductDialog($event)"
         [sectionName]="''"
         [sectionIcon]="''"
         [productsList]="products()"
+        (updateList)="getFilteredProductsList()"
+        (editProduct)="openAddProductDialog($event)"
       ></app-products-list>
 
       <div class="paginator">
         <mat-paginator
-          (page)="handlePageEvent($event)"
+          aria-label="Products list pagination"
           [length]="totalElements()"
           [pageSize]="pageSize()"
           [pageSizeOptions]="[5, 10, 25, 50]"
-          aria-label="Select page"
-        >
-        </mat-paginator>
+          (page)="handlePageEvent($event)"
+        ></mat-paginator>
       </div>
     </div>
   </div>

@@ -23,7 +23,12 @@ import { MatSliderModule } from '@angular/material/slider';
 import { debounceTime, lastValueFrom } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Category } from '../../../interfaces/category';
-import { HomeProductDTO, Product } from '../../../interfaces/products';
+import { Pagination } from '../../../interfaces/generic';
+import {
+  HomeProductDTO,
+  Product,
+  ProductQueryParams,
+} from '../../../interfaces/products';
 import { CategoryService } from '../../../services/category.service';
 import { ProductService } from '../../../services/product.service';
 import { ProductsListComponent } from '../../../shared/components/products-list/products-list.component';
@@ -71,12 +76,12 @@ export class AdvancedSearchPage implements OnInit {
   ngOnInit(): void {
     this.buildForm();
     this.getCategories();
-    // this.getProductsList();
+    this.getFilteredProductsList();
   }
 
   buildForm() {
     this.filterForm = this._fb.group({
-      name: '',
+      name: undefined,
       minPrice: 0,
       maxPrice: 50000,
       categories: [],
@@ -84,7 +89,7 @@ export class AdvancedSearchPage implements OnInit {
 
     this.filterForm.valueChanges
       .pipe(debounceTime(300))
-      .subscribe(() => this.getProductsList());
+      .subscribe(() => this.getFilteredProductsList());
   }
 
   getCategories() {
@@ -96,49 +101,29 @@ export class AdvancedSearchPage implements OnInit {
   handlePageEvent(e: PageEvent) {
     this.pageNumber.set(e.pageIndex);
     this.pageSize.set(e.pageSize);
-    this.getProductsList();
+    this.getFilteredProductsList();
   }
 
-  getProductsList() {
+  getFilteredProductsList() {
     const filters = this.filterForm.getRawValue();
-    let filter: string = '';
-    if (filters.name) {
-      filter = `containing(upper(name), upper('${filters.name}'))`;
+    if (!filters.name) {
+      filters.name = undefined;
     }
 
-    if (filter != '') {
-      filter = this.concatFilterParam(filter);
-    }
+    const pagination: Pagination = {
+      page: this.pageNumber(),
+      size: this.pageSize(),
+    };
 
-    filter = `${filter} price gt '${filters.minPrice}'`;
-    filter = this.concatFilterParam(filter);
-    filter = `${filter} price lt '${filters.maxPrice}'`;
+    const queryParams: ProductQueryParams = {
+      filters,
+      pagination,
+    };
 
-    if (filters.categories && filters.categories.length != 0) {
-      const categoriesId: string[] = filters.categories;
-      filter = this.concatFilterParam(filter);
-
-      if (categoriesId.length == 1) {
-        filter = `${filter} category eq '${categoriesId[0]}'`;
-      } else {
-        let categoriesFilter = '';
-        categoriesId.forEach((category) => {
-          if (categoriesFilter !== '') {
-            categoriesFilter = categoriesFilter + ' or ';
-          }
-          categoriesFilter = `${categoriesFilter}category eq '${category}'`;
-        });
-
-        filter = `${filter} (${categoriesFilter})`;
-      }
-    }
-
-    this._productService
-      .getCrudl(filter, 'name asc', this.pageNumber(), this.pageSize())
-      .then((response) => {
-        this.products.set(response.contents);
-        this.totalElements.set(response.totalElements);
-      });
+    this._productService.getFilteredProducts(queryParams).then((response) => {
+      this.products.set(response.content);
+      this.totalElements.set(response.totalItems);
+    });
   }
 
   concatFilterParam(filter: string): string {
@@ -161,9 +146,11 @@ export class AdvancedSearchPage implements OnInit {
         })
         .afterClosed()
     ).then((response) => {
+      console.log(response);
+
       if (!response) return;
 
-      this.getProductsList();
+      this.getFilteredProductsList();
     });
   }
 }
