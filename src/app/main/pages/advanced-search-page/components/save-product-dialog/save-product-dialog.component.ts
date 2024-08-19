@@ -65,10 +65,6 @@ export class SaveProductDialog implements OnInit {
 
     if (this.editing) {
       this.productForm.patchValue(this._data.product);
-      this.productForm
-        .get('category')!
-        .setValue(this._data.product.category.id);
-
       this.editingProductId = this._data.product.id;
     }
   }

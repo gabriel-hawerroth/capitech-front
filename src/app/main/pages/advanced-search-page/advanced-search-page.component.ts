@@ -146,8 +146,6 @@ export class AdvancedSearchPage implements OnInit {
         })
         .afterClosed()
     ).then((response) => {
-      console.log(response);
-
       if (!response) return;
 
       this.getFilteredProductsList();

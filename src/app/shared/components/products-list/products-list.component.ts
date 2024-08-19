@@ -4,7 +4,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { UUID } from 'crypto';
 import { lastValueFrom } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { HomeProductDTO, Product } from '../../../interfaces/products';
