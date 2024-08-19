@@ -52,8 +52,8 @@ export class SaveProductDialog implements OnInit {
 
   categories: Category[] = this._data.categories;
 
+  selectedFile: File | null = null;
   selectedFileName: string | null = null;
-  productImageByte64: string | null = null;
 
   saving = signal(false);
 
@@ -88,24 +88,25 @@ export class SaveProductDialog implements OnInit {
     fileInput.click();
   }
 
-  onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      this.selectedFileName = input.files[0].name;
+  onFileSelected(event: any) {
+    const file = event?.target.files[0];
+    if (!file) return;
 
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.productImageByte64 = (reader.result as string).split(',')[1];
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
+    this.selectedFile = file;
+    this.selectedFileName = file.name;
   }
 
   removeSelectedFile() {
+    this.selectedFile = null;
     this.selectedFileName = null;
   }
 
   save() {
+    if (this.productForm.invalid) {
+      this._utils.showMessage('Formulário inválido');
+      return;
+    }
+
     if (this.editing) {
       this.update();
     } else {
@@ -114,41 +115,29 @@ export class SaveProductDialog implements OnInit {
   }
 
   create() {
-    if (this.productForm.invalid) {
-      this._utils.showMessage('Formulário inválido');
-      return;
-    }
-
     this.saving.set(true);
     this._productService
       .create(this.getSaveProductDTO)
       .then(async (product) => {
         this._utils.showMessage('Produto salvo com sucesso', 4000);
 
-        if (this.productImageByte64 != null) {
+        if (this.selectedFile) {
           await this._productService
-            .changeImage(product.id!, this.productImageByte64)
-            .catch(() => {
+            .changeImage(product.id!, this.selectedFile)
+            .catch(() =>
               this._utils.showMessage(
                 'Houve um erro ao salvar a imagem do produto'
-              );
-            });
+              )
+            );
         }
 
         this._dialogRef.close(true);
       })
-      .catch(() => {
-        this._utils.showMessage('Erro ao salvar o produto');
-      })
+      .catch(() => this._utils.showMessage('Erro ao salvar o produto'))
       .finally(() => this.saving.set(false));
   }
 
   update() {
-    if (this.productForm.invalid) {
-      this._utils.showMessage('Formulário inválido');
-      return;
-    }
-
     this.saving.set(true);
 
     this._productService
@@ -157,9 +146,7 @@ export class SaveProductDialog implements OnInit {
         this._utils.showMessage('Produto atualizado com sucesso', 4000);
         this._dialogRef.close(true);
       })
-      .catch(() => {
-        this._utils.showMessage('Erro ao atualizar o produto');
-      })
+      .catch(() => this._utils.showMessage('Erro ao atualizar o produto'))
       .finally(() => this.saving.set(false));
   }
 

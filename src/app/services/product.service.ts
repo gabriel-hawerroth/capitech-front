@@ -97,23 +97,22 @@ export class ProductService {
     );
   }
 
-  changeImage(productId: number, image: string): Promise<Product> {
-    const dto: ChangeProductImageDTO = {
-      productId,
-      image,
-    };
-
-    console.log(dto);
+  changeImage(productId: number, image: File): Promise<void> {
+    const formData = new FormData();
+    formData.append('image', image);
 
     return lastValueFrom(
-      this._http.post<Product>(`${this.apiUrl}/changeProductImage`, dto)
+      this._http.patch<void>(
+        `${this.apiUrl}/changeProductImage/${productId}`,
+        formData
+      )
     );
   }
 
-  removeImage(productId: number): Promise<Product> {
+  removeImage(productId: number): Promise<void> {
     return lastValueFrom(
-      this._http.put<Product>(
-        `${this.apiUrl}/removeProductImage${productId}`,
+      this._http.patch<void>(
+        `${this.apiUrl}/removeProductImage/${productId}`,
         null
       )
     );

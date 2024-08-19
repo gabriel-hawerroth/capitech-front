@@ -130,31 +130,21 @@ export class ProductsListComponent implements OnInit {
     fileInput.click();
   }
 
-  onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const productImageByte64 = (reader.result as string).split(',')[1];
+  onFileSelected(event: any) {
+    const file = event?.target.files[0];
+    if (!file) return;
 
-        this._utils.showMessage('Enviando');
-        this._productService
-          .changeImage(this.selectedProductId!, productImageByte64)
-          .then(() => {
-            this._utils.showMessage('Imagem adicionada com sucesso');
-            this.updateList.emit();
-          })
-          .catch(() => {
-            this._utils.showMessage(
-              'Houve um erro ao salvar a imagem do produto'
-            );
-          })
-          .finally(() => {
-            this.selectedProductId = null;
-          });
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
+    this._utils.showMessage('Enviando');
+    this._productService
+      .changeImage(this.selectedProductId!, file)
+      .then(() => {
+        this._utils.showMessage('Imagem adicionada com sucesso');
+        this.updateList.emit();
+      })
+      .catch(() => {
+        this._utils.showMessage('Houve um erro ao salvar a imagem do produto');
+      })
+      .finally(() => (this.selectedProductId = null));
   }
 
   removeImage(productId: number) {
@@ -171,9 +161,9 @@ export class ProductsListComponent implements OnInit {
             this._utils.showMessage('Imagem removida com sucesso');
             this.updateList.emit();
           })
-          .catch(() => {
-            this._utils.showMessage('Erro ao tentar remover a imagem');
-          });
+          .catch(() =>
+            this._utils.showMessage('Erro ao tentar remover a imagem')
+          );
       });
   }
 }
