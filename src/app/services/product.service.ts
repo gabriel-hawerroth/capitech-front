@@ -4,13 +4,12 @@ import { lastValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { PaginationResponse } from '../interfaces/generic';
 import {
-  ChangeProductImageDTO,
   ChangeProductPriceDTO,
   ChangeProductStockQuantityDTO,
-  SaveProductDTO,
   HomeProductListDTO,
   Product,
   ProductQueryParams,
+  SaveProductDTO,
 } from '../interfaces/products';
 
 @Injectable({
@@ -72,28 +71,32 @@ export class ProductService {
     );
   }
 
-  changePrice(productId: number, price: number): Promise<Product> {
+  changePrice(productId: number, newPrice: number): Promise<void> {
     const dto: ChangeProductPriceDTO = {
-      productId,
-      price,
+      newPrice,
     };
 
     return lastValueFrom(
-      this._http.put<Product>(`${this.apiUrl}/editProductPrice`, dto)
+      this._http.patch<void>(
+        `${this.apiUrl}/editProductPrice/${productId}`,
+        dto
+      )
     );
   }
 
   changeStockQuantity(
     productId: number,
-    stockQuantity: number
-  ): Promise<Product> {
+    newStockQuantity: number
+  ): Promise<void> {
     const dto: ChangeProductStockQuantityDTO = {
-      productId,
-      stockQuantity,
+      newStockQuantity,
     };
 
     return lastValueFrom(
-      this._http.post<Product>(`${this.apiUrl}/editProductStockQuantity`, dto)
+      this._http.patch<void>(
+        `${this.apiUrl}/editProductStockQuantity/${productId}`,
+        dto
+      )
     );
   }
 

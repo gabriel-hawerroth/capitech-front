@@ -15,8 +15,9 @@
         matInput
         [formControl]="stockQuantityCtrl"
         currencyMask
-        [options]="{ max: 50000, precision: 0 }"
+        [options]="{ max: 50000, min: 0, precision: 0 }"
       />
+      <mat-error>{{ getErrorMessage }}</mat-error>
     </mat-form-field>
   </div>
 

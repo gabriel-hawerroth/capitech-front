@@ -76,7 +76,7 @@ export class ProductsListComponent implements OnInit {
         })
         .afterClosed()
     ).then((response: number) => {
-      if (!response) return;
+      if (!(typeof response === 'number')) return;
 
       this._utils.showMessage('Enviando');
 
@@ -86,18 +86,21 @@ export class ProductsListComponent implements OnInit {
           this._utils.showMessage('Preço atualizado com sucesso');
           this.updateList.emit();
         })
-        .catch(() => {
-          this._utils.showMessage('Erro ao tentar atualizar o preço');
-        });
+        .catch(() =>
+          this._utils.showMessage('Erro ao tentar atualizar o preço')
+        );
     });
   }
 
-  openChangeStockQuantityDialog(productId: number) {
+  openChangeStockQuantityDialog(product: HomeProductDTO | Product) {
     lastValueFrom(
       this._matDialog
         .open(ChangeProductStockQuantityDialog, {
           width: '22vw',
           minWidth: '22vw',
+          data: {
+            actualQuantity: product.stock_quantity,
+          },
         })
         .afterClosed()
     ).then((response: number) => {
@@ -106,18 +109,18 @@ export class ProductsListComponent implements OnInit {
       this._utils.showMessage('Enviando');
 
       this._productService
-        .changeStockQuantity(productId, response)
+        .changeStockQuantity(product.id!, response)
         .then(() => {
           this._utils.showMessage(
             'Quantidade em estoque atualizada com sucesso'
           );
           this.updateList.emit();
         })
-        .catch(() => {
+        .catch(() =>
           this._utils.showMessage(
             'Erro ao tentar atualizar a quantidade em estoque'
-          );
-        });
+          )
+        );
     });
   }
 
@@ -141,9 +144,9 @@ export class ProductsListComponent implements OnInit {
         this._utils.showMessage('Imagem adicionada com sucesso');
         this.updateList.emit();
       })
-      .catch(() => {
-        this._utils.showMessage('Houve um erro ao salvar a imagem do produto');
-      })
+      .catch(() =>
+        this._utils.showMessage('Houve um erro ao salvar a imagem do produto')
+      )
       .finally(() => (this.selectedProductId = null));
   }
 

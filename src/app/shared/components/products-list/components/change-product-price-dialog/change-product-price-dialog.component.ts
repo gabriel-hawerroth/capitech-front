@@ -24,8 +24,25 @@ import { NgxCurrencyDirective } from 'ngx-currency';
 export class ChangeProductPriceDialog {
   private readonly _dialogData = inject(MAT_DIALOG_DATA);
 
-  priceCtrl = new FormControl(
-    this._dialogData.actualPrice,
-    Validators.required
-  );
+  priceCtrl = new FormControl(this._dialogData.actualPrice, [
+    Validators.required,
+    Validators.max(50000),
+    Validators.min(0),
+  ]);
+
+  get getErrorMessage(): string {
+    if (this.priceCtrl.hasError('required')) {
+      return 'O preço é obrigatório';
+    }
+
+    if (this.priceCtrl.hasError('max')) {
+      return 'O preço não pode ser maior que R$ 50.000,00';
+    }
+
+    if (this.priceCtrl.hasError('min')) {
+      return 'O preço não pode ser menor que R$ 0,00';
+    }
+
+    return '';
+  }
 }

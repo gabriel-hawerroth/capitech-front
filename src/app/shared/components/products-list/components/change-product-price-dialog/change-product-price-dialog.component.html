@@ -10,7 +10,15 @@
       [hideRequiredMarker]="true"
     >
       <mat-label>Preço</mat-label>
-      <input type="text" matInput [formControl]="priceCtrl" currencyMask />
+      <input
+        type="text"
+        matInput
+        [formControl]="priceCtrl"
+        currencyMask
+        [options]="{ max: 50000, min: 0 }"
+      />
+
+      <mat-error>{{ getErrorMessage }}</mat-error>
     </mat-form-field>
   </div>
 

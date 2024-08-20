@@ -7,7 +7,7 @@ export interface Product {
   description: string;
   price: number;
   category: Category;
-  stockQuantity: number;
+  stock_quantity: number;
   image: string;
 }
 
@@ -36,6 +36,7 @@ export interface HomeProductDTO {
   name: string;
   price: number;
   image: string;
+  stock_quantity: number;
 }
 
 export interface SaveProductDTO {
@@ -47,13 +48,11 @@ export interface SaveProductDTO {
 }
 
 export interface ChangeProductPriceDTO {
-  productId: number;
-  price: number;
+  newPrice: number;
 }
 
 export interface ChangeProductStockQuantityDTO {
-  productId: number;
-  stockQuantity: number;
+  newStockQuantity: number;
 }
 
 export interface ChangeProductImageDTO {
