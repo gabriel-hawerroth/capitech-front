@@ -29,7 +29,7 @@ export class UserNavigationHistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this._productService.getUserSearchHistory().then((response) => {
-      this.products.set(response.productsList);
+      this.products.set(response);
     });
   }
 

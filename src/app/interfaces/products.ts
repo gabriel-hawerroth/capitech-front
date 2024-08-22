@@ -27,10 +27,6 @@ export interface GetProductCrudL extends GetCrudL {
   contents: Product[];
 }
 
-export interface HomeProductListDTO {
-  productsList: HomeProductDTO[];
-}
-
 export interface HomeProductDTO {
   id: number;
   name: string;

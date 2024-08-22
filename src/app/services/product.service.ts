@@ -6,7 +6,7 @@ import { PaginationResponse } from '../interfaces/generic';
 import {
   ChangeProductPriceDTO,
   ChangeProductStockQuantityDTO,
-  HomeProductListDTO,
+  HomeProductDTO,
   Product,
   ProductQueryParams,
   SaveProductDTO,
@@ -39,25 +39,23 @@ export class ProductService {
     );
   }
 
-  getTrendingProducts(): Promise<HomeProductListDTO> {
+  getTrendingProducts(): Promise<HomeProductDTO[]> {
     return lastValueFrom(
-      this._http.get<HomeProductListDTO>(
-        `${this.apiUrl}/getTrendingProductsList`
-      )
+      this._http.get<HomeProductDTO[]>(`${this.apiUrl}/getTrendingProductsList`)
     );
   }
 
-  getBestSellingProducts(): Promise<HomeProductListDTO> {
+  getBestSellingProducts(): Promise<HomeProductDTO[]> {
     return lastValueFrom(
-      this._http.get<HomeProductListDTO>(
+      this._http.get<HomeProductDTO[]>(
         `${this.apiUrl}/getBestSellingProductsList`
       )
     );
   }
 
-  getUserSearchHistory(): Promise<HomeProductListDTO> {
+  getUserSearchHistory(): Promise<HomeProductDTO[]> {
     return lastValueFrom(
-      this._http.get<HomeProductListDTO>(`${this.apiUrl}/getUserSearchHistory`)
+      this._http.get<HomeProductDTO[]>(`${this.apiUrl}/getUserSearchHistory`)
     );
   }
 
