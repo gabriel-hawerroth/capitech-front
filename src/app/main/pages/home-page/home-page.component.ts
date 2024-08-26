@@ -27,10 +27,9 @@ export class HomePage implements OnInit {
     this._productService
       .getTrendingProducts()
       .then((response) => this.trendingProductsList.set(response));
-    // this._productService
-    //   .getBestSellingProducts()
-    //   .then((response) =>
-    //     this.bestSellingProductsList.set(response.productsList)
-    //   );
+
+    this._productService
+      .getBestSellingProducts()
+      .then((response) => this.bestSellingProductsList.set(response));
   }
 }
