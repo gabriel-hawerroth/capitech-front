@@ -43,15 +43,14 @@ export class ShoppingCartPage implements OnInit {
   readonly purchaseTotalPrice = signal(0);
 
   ngOnInit(): void {
-    this._shoppingCartService.getUserShoppingCart().then((response) => {
-      this.cartItems.set(response.items);
-
-      this.purchaseTotalPrice.set(
-        response.items.reduce(
-          (count, item) => count + item.productPrice * item.quantity,
-          0
-        )
-      );
-    });
+    // this._shoppingCartService.getUserShoppingCart().then((response) => {
+    //   this.cartItems.set(response.items);
+    //   this.purchaseTotalPrice.set(
+    //     response.items.reduce(
+    //       (count, item) => count + item.productPrice * item.quantity,
+    //       0
+    //     )
+    //   );
+    // });
   }
 }

@@ -28,9 +28,9 @@ export class UserNavigationHistoryComponent implements OnInit {
   products = signal<HomeProductDTO[]>([]);
 
   ngOnInit(): void {
-    this._productService.getUserSearchHistory().then((response) => {
-      this.products.set(response);
-    });
+    // this._productService.getUserSearchHistory().then((response) => {
+    //   this.products.set(response);
+    // });
   }
 
   selectItem(id: number) {
