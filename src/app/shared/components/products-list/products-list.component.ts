@@ -1,11 +1,18 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, OnInit, inject, input, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+  input,
+  output,
+  signal,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { lastValueFrom } from 'rxjs';
-import { environment } from '../../../../environments/environment';
 import { HomeProductDTO, Product } from '../../../interfaces/products';
 import { ProductService } from '../../../services/product.service';
 import { UtilsService } from '../../../utils/utils.service';
@@ -27,6 +34,7 @@ import { ChangeProductStockQuantityDialog } from './components/change-product-st
   templateUrl: './products-list.component.html',
   styleUrl: './products-list.component.scss',
   providers: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsListComponent implements OnInit {
   updateList = output();
@@ -42,8 +50,7 @@ export class ProductsListComponent implements OnInit {
   private readonly _matDialog = inject(MatDialog);
   private readonly _activatedRoute = inject(ActivatedRoute);
 
-  isProductionEnv = environment.production;
-  isHomePage = true;
+  isHomePage = signal(true);
 
   selectedProductId: number | null = null;
 
@@ -52,7 +59,7 @@ export class ProductsListComponent implements OnInit {
       .map((segment) => segment.path)
       .join('/');
 
-    this.isHomePage = currentRoute === '';
+    this.isHomePage.set(currentRoute === '');
   }
 
   navigate(productId: number, event: Event) {

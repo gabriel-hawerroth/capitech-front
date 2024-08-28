@@ -33,7 +33,7 @@
       <span class="product-price">
         <span class="price">R$ {{ product.price | customCurrency }}</span>
 
-        @if (!isProductionEnv && !isHomePage) {
+        @if (!isHomePage()) {
         <button mat-icon-button [matMenuTriggerFor]="menu" class="actions-btn">
           <span class="material-symbols-outlined">more_vert</span>
         </button>

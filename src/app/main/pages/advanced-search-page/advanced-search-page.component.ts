@@ -21,7 +21,6 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { debounceTime, lastValueFrom } from 'rxjs';
-import { environment } from '../../../../environments/environment';
 import { Category } from '../../../interfaces/category';
 import { Pagination } from '../../../interfaces/generic';
 import {
@@ -58,8 +57,6 @@ export class AdvancedSearchPage implements OnInit {
   private readonly _categoryService = inject(CategoryService);
   private readonly _productService = inject(ProductService);
   private readonly _fb = inject(FormBuilder);
-
-  isProductionEnv = environment.production;
 
   categories = signal<Category[]>([]);
   products = signal<Product[]>([]);
