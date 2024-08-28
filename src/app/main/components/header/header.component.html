@@ -4,9 +4,10 @@
 
     <div id="actions">
       <app-header-action-btn
-        [icon]="'person'"
-        [topLabel]="''"
-        [bottomLabel]="'MINHA CONTA'"
+        [routerLink]="auth.logged ? 'minha-conta' : 'login'"
+        icon="person"
+        topLabel=""
+        bottomLabel="MINHA CONTA"
       ></app-header-action-btn>
 
       <!-- <app-header-action-btn
@@ -18,7 +19,7 @@
       <button mat-button id="cart-btn" routerLink="/carrinho">
         <div class="btn-content">
           <div id="icon">
-            <span class="material-symbols-outlined"> shopping_cart </span>
+            <span class="material-symbols-outlined">shopping_cart</span>
           </div>
 
           <div id="labels">
