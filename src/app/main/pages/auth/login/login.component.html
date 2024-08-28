@@ -1,4 +1,4 @@
-<div class="page login">
+<div class="page auth">
   <mat-card class="card">
     <form [formGroup]="loginForm">
       <div class="title">
@@ -8,7 +8,7 @@
       </div>
 
       <div class="row">
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" [hideRequiredMarker]="true">
           <mat-label>Email</mat-label>
           <input
             matInput
@@ -20,7 +20,7 @@
       </div>
 
       <div class="row">
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" [hideRequiredMarker]="true">
           <mat-label>Senha</mat-label>
           <input
             matInput
@@ -38,26 +38,40 @@
       </div>
 
       <div class="row action">
+        @if (loading()) {
+        <mat-spinner [diameter]="50"></mat-spinner>
+        } @else {
         <button
-          mat-raised-button
+          mat-fab
+          extended
           color="primary"
           [disabled]="loginForm.invalid"
+          (click)="login()"
         >
           Entrar
         </button>
+        }
 
-        <span class="sub-action" routerLink="/esqueci-minha-senha">
+        <!-- <span class="sub-action" routerLink="/esqueci-minha-senha">
           Esqueci minha senha
-        </span>
-      </div>
-
-      <mat-divider></mat-divider>
-
-      <div class="title">
-        <h2>Novo por aqui?</h2>
-
-        <span>Informe seus dados abaixo para acessá-la</span>
+        </span> -->
       </div>
     </form>
+
+    <mat-divider></mat-divider>
+
+    <div class="second-action">
+      <div class="title" style="margin-bottom: 1.5rem">
+        <h2>Novo por aqui?</h2>
+
+        <span>Crie sua conta, é fácil!</span>
+      </div>
+
+      <div class="second-action-btn">
+        <button mat-fab extended routerLink="/crie-sua-conta">
+          Cadastre-se
+        </button>
+      </div>
+    </div>
   </mat-card>
 </div>

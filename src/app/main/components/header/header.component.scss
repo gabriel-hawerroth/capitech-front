@@ -1,4 +1,4 @@
-@import '../../../shared/styles/colors.scss';
+@import 'colors.scss';
 
 #header {
     height: auto;
@@ -29,7 +29,7 @@
             }
 
             #cart-btn {
-                background-color: #009e2a;
+                background-color: $primary-green;
                 color: #fff;
                 font-weight: bold;
                 font-size: 1.3rem;
