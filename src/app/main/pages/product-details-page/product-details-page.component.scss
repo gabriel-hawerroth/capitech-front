@@ -1,4 +1,4 @@
-@import '../../../shared/styles/colors.scss';
+@import 'colors.scss';
 
 .page {
     display: flex;
@@ -46,11 +46,9 @@
                 display: flex;
                 gap: .8rem;
                 align-items: center;
-                color: rgb(221, 0, 0);
+                color: $primary-red;
                 margin-bottom: .2rem;
             }
-
-
 
             .payment {
                 display: flex;
