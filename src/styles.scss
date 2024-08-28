@@ -13,7 +13,7 @@ $capitech-theme: mat.define-light-theme((color: (primary: $capitech-primary,
 
 @include mat.all-component-themes($capitech-theme);
 
-@import './app/shared/styles/colors.scss';
+@import 'colors.scss';
 
 // Full HD+
 @media screen and (min-width: 1700px) {}
@@ -169,6 +169,22 @@ input[type="number"]::-webkit-outer-spin-button {
                 input {
                     color: $dark-font !important;
                 }
+            }
+        }
+    }
+}
+
+.login {
+    .mdc-text-field--outlined {
+        .mdc-floating-label {
+            color: $dark-font !important;
+        }
+
+        .mat-mdc-form-field-infix {
+            color: $dark-font !important;
+
+            input {
+                color: $dark-font !important;
             }
         }
     }

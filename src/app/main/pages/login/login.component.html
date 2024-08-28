@@ -1,3 +1,63 @@
-<div class="page">
-  <span>login-component works!</span>
+<div class="page login">
+  <mat-card class="card">
+    <form [formGroup]="loginForm">
+      <div class="title">
+        <h2>Já tem uma conta?</h2>
+
+        <span>Informe seus dados abaixo para acessá-la</span>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            type="email"
+            formControlName="email"
+            autocomplete="off"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Senha</mat-label>
+          <input
+            matInput
+            type="password"
+            formControlName="password"
+            autocomplete="new-password"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-checkbox formControlName="rememberMe">
+          <span>Lembrar meus dados</span>
+        </mat-checkbox>
+      </div>
+
+      <div class="row action">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="loginForm.invalid"
+        >
+          Entrar
+        </button>
+
+        <span class="sub-action" routerLink="/esqueci-minha-senha">
+          Esqueci minha senha
+        </span>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="title">
+        <h2>Novo por aqui?</h2>
+
+        <span>Informe seus dados abaixo para acessá-la</span>
+      </div>
+    </form>
+  </mat-card>
 </div>
