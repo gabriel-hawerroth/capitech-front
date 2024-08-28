@@ -5,7 +5,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -38,7 +38,7 @@ export class ShoppingCartPage implements OnInit {
 
   cartItems = signal<ShoppingCartItem[]>([]);
 
-  cepControl = new FormControl('', Validators.required);
+  cepControl = new FormControl('');
 
   readonly purchaseTotalPrice = signal(0);
 
