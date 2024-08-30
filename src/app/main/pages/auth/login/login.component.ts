@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { passowordRegex } from '../../../../utils/utils';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -37,6 +38,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 })
 export class LoginPage {
   private readonly _fb = inject(FormBuilder);
+  private readonly _authService = inject(AuthService);
 
   loginForm = this._fb.group({
     email: ['gabriel@gmail.com', [Validators.required, Validators.email]],
@@ -54,10 +56,15 @@ export class LoginPage {
       return;
     }
 
+    const data = this.loginForm.getRawValue();
+
     this.loading.set(true);
 
-    setTimeout(() => {
-      this.loading.set(false);
-    }, 2000);
+    this._authService
+      .login(data.email!, data.password!)
+      .then(() => {
+        // Do something
+      })
+      .finally(() => this.loading.set(false));
   }
 }
