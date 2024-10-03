@@ -1,9 +1,9 @@
 npm run build
 
-ssh root@15.229.18.114 "pm2 delete ssr.capitech"
+ssh ubuntu@168.138.150.229 "pm2 delete ssr.capitech"
 
-ssh root@15.229.18.114 "rm -rf /var/www/html/capitech/*"
+ssh ubuntu@168.138.150.229 "rm -rf /home/ubuntu/prd_projects/front/capitech/*"
 
-scp -r dist/capitech-front/* root@15.229.18.114:/var/www/html/capitech/
+scp -r dist/capitech-front/* ubuntu@168.138.150.229:/home/ubuntu/prd_projects/front/capitech/
 
-ssh root@15.229.18.114 "/root/start_capitech.sh"
+ssh ubuntu@168.138.150.229 "/home/ubuntu/start_scripts/start_capitech.sh"
